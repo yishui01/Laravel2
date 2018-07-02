@@ -11,11 +11,17 @@ class TopicObserver
 {
     public function creating(Topic $topic)
     {
-        //
+
     }
 
     public function updating(Topic $topic)
     {
         //
+    }
+
+    //每次更新之前，调用save方法时触发
+    public function saving(Topic $topic)
+    {
+        $topic->excerpt = make_excerpt($topic->body);
     }
 }

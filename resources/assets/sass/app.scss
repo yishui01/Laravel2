@@ -70,6 +70,30 @@ body {
       margin-bottom: 0px;
     }
   }
+
+  .nav-tabs {
+    margin-bottom: 20px;
+
+    >li.active > a {
+      background-color: #fff;
+    }
+  }
+
+  .list-group {
+    .list-group-item {
+      border: none;
+      margin-bottom: 0px;
+      border-bottom: 1px solid #efefef;
+
+      .meta {
+        color: #b3b3b3;
+      }
+    }
+  }
+
+  .pagination {
+    margin: 12px 0;
+  }
 }
 
 
@@ -100,6 +124,24 @@ body {
       margin-bottom: 12px;
       border: 0;
       border-top: 1px solid #dcebf5;
+    }
+  }
+}
+
+/* header */
+
+.navbar-static-top {
+
+  .dropdown-menu {
+    padding: 0px;
+
+    li a {
+      border-bottom: 1px solid #d8d8d8;
+      line-height: 2.4;
+
+      .glyphicon {
+        margin-right: 8px;
+      }
     }
   }
 }

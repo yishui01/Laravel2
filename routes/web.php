@@ -30,3 +30,12 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+//给用户控制器注册一个资源路由：
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+/*上面的代码等同于*/
+/*
+Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
+*/

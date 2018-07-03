@@ -40,9 +40,9 @@ Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 */
 
-//话题（帖子）
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
-
+//话题（帖子）这里没有show方法
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show'); //show方法加了seo优化后缀
 //分类
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 

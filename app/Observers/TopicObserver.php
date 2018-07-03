@@ -22,6 +22,7 @@ class TopicObserver
     //每次更新之前，调用save方法时触发
     public function saving(Topic $topic)
     {
+        $topic->body = clean($topic->body, 'user_topic_body'); //使用HTMLPurifier对内容自动进行过滤
         $topic->excerpt = make_excerpt($topic->body);
     }
 }

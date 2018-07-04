@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasRoles;
     use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;//RecordLastActivedTime前置中间件中记录用户登录时间到redis，需要调用方法在这个trait中
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

@@ -30,7 +30,7 @@ class TopicObserver
        // }
     }
 
-    //话题删除时同时删除评论
+    //话题删除时删除评论
     public function deleted(Topic $topic)
     {
         \DB::table('replies')->where('topic_id', $topic->id)->delete();

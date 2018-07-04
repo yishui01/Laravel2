@@ -27,8 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        \App\Models\Topic::observe(\App\Observers\TopicObserver::class); //注册观察器
-
         //
     }
 }

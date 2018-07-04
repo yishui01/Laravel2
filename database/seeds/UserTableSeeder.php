@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
         $user->assignRole('Founder');
 
         // 将 2 号用户指派为『管理员』
-        $user = User::find(2);
+        $user = User::find(3);
         $user->assignRole('Maintainer');
 
     }

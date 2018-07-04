@@ -10,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasRoles;
+    use Traits\ActiveUserHelper;
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

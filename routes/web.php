@@ -49,4 +49,8 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 //设置话题上传图片路由
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+//回复的创建和删除
 Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
+
+//回复通知
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);

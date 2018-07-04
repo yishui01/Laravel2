@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
     use Notifiable{
         notify as protected laravelNotify;
     }

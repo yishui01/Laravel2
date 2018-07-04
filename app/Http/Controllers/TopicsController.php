@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
@@ -25,7 +26,7 @@ class TopicsController extends Controller
 
     public function show(Request $request, Topic $topic)
     {
-        // URL 矫正
+        // URL 矫正，有优化seo后缀的，重定向到url后缀
         if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);
         }

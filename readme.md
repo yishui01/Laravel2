@@ -1,58 +1,44 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## laravel-china第二个项目---larbbs论坛系统
+本项目是按照laravel-china教程02编写，主要用于练习laravel框架
+## 项目功能
+- 用户：登录/注册、更新资料、发布话题、发表回复
+- 管理员:除了普通用户的功能外，可以进入后台对内容进行管理，但不可以对用户进行删除操作
+- 站长:内容管理、用户管理，站点信息管理
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## 总结
+论坛的基本功能已经都具有了，同时也学到了一些新的东西
 
-## About Laravel
+1、实用的composer包的使用方法
+- htmlpurifier过滤xss
+- laravel-permisson构建后台权限系统
+- horizon队列监控 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+2、使用redis将发送邮件进行队列操作，入队，监听，出队，出队失败时记录到mysql
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+3、调用百度翻译接口将话题标题翻译为英文
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+4、手动创建artisan命令，并通过php设置crontab定时任务
 
-## Learning Laravel
+5、使用前置中间件记录用户最后操作时间
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+6、通过构建后台权限系统对网站整体数据进行设置
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+## 吐槽
+1、教程里面有个地方是通过mysql的外键约数来保证删除数据时的统一性，
+因为我之前没有在mysql层使用过外键约束数据，所以有点不太习惯，
+不过没有特殊业务需求，在innodb的情况下这种外键约束的方法还是不错的。
 
-## Laravel Sponsors
+2、项目有一个功能是用户每次进行操作时更新用户最后一次操作时间，
+这个操作时间是被直接缓存到redis中，
+并且代码是直接用<font color=red>redis类</font>进行操作的，
+而不是用公共缓存类操作的，这就意味着这段代码复用性不是那么好，
+不能通过修改配置项把缓存方式改成其他方式，然而我还是跟着复制粘贴了，哈哈哈哈
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+## 下一步学习计划
+前两部教程都是在没看laravel手册的情况下强行跟着教程刷项目，
+有很多地方都似懂非懂，接下来还是准备先看完手册再刷下面的教程，
+毕竟是世界上最好的语言里的最优雅的框架，还是给点面子看下手册<滑稽><滑稽>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

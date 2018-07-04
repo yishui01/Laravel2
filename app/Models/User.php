@@ -19,6 +19,30 @@ class User extends Authenticatable
         notify as protected laravelNotify;
     }
 
+    //这是一个修改器，方法名必须按照格式来定义set{属性的驼峰式命名}Attribute（访问器是 访问属性时 修改，修改器是在 写入数据库前 修改）
+    public function setPasswordAttribute($value)
+    {
+        // 如果值的长度等于 60，即认为是已经做过加密的情况
+        if (strlen($value) != 60) {
+
+            // 不等于 60，做密码加密处理
+            $value = bcrypt($value);
+        }
+
+        $this->attributes['password'] = $value;
+    }
+
+    public function setAvatarAttribute($path)
+    {
+        // 如果不含uploads，需要补全 URL
+        if ( ! strpos ($path, 'uploads')) {
+            // 拼接完整的 URL
+            $path = "/uploads/images/avatars/$path";
+        }
+
+        $this->attributes['avatar'] = $path;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

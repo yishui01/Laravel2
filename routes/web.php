@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', 'PagesController@root')->name('root');
-
+Route::get('/', 'TopicsController@index')->name('root');
 /**************************************************************/
 //Auth::routes(); //等同于下面的这些路由，为了方便观看，替换为具体路由
 
@@ -55,5 +54,6 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 //回复通知
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
-
+//无权限访问时的跳转页
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
+

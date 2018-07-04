@@ -26,4 +26,10 @@ class ReplyObserver
     {
         //
     }
+
+    //删完回复之后还要减去话题回复数量
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
+    }
 }

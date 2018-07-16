@@ -39,15 +39,17 @@ class UsersTableSeeder extends Seeder
 
         // 单独处理第一个用户的数据
         $user = User::find(1);
-        $user->name = '最强弃少';
+        $user->name = 'zuiqiangqishao';
         $user->email = '727040917@qq.com';
+        $user->password = bcrypt('123456');
+        $user->avatar = 'https://avatars3.githubusercontent.com/u/20850040?s=460&v=4';
         $user->save();
 
         // 初始化用户角色，将 1 号用户指派为『站长』
         $user->assignRole('Founder');
 
         // 将 2 号用户指派为『管理员』
-        $user = User::find(3);
+        $user = User::find(2);
         $user->assignRole('Maintainer');
 
     }

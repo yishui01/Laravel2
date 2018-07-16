@@ -38,11 +38,10 @@ class User extends Authenticatable
     public function setAvatarAttribute($path)
     {
         // 如果不含uploads，需要补全 URL
-        if ( ! strpos ($path, 'uploads')) {
+        if ( ! strpos ($path, 'uploads') && strpos($path, 'http') === FALSE) {
             // 拼接完整的 URL
-            $path = "/uploads/images/avatars/$path";
+            $path = "/uploads/images/avatars/".$path;
         }
-
         $this->attributes['avatar'] = $path;
     }
 

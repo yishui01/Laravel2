@@ -31,7 +31,6 @@ class UsersController extends Controller
         if($userRquest->avatar) {
             //上传了新文件
             $path = config('myconfig.file.avatars');
-
             $url = $info['avatar']->store($path);
             $url = '/'.$url;
             $info['avatar'] = $url;

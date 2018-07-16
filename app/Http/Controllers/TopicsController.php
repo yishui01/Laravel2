@@ -11,7 +11,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Link;
-
+use Validator;
 class TopicsController extends Controller
 {
     public function __construct()
@@ -75,26 +75,35 @@ class TopicsController extends Controller
 		return redirect()->route('topics.index')->with('success', '成功删除');
 	}
 
-    public function uploadImage(Request $request, ImageUploadHandler $uploader)
+    public function uploadImage(Request $request)
     {
+        if ($file = $request->upload_file) {
         // 初始化返回数据，默认是失败的
         $data = [
             'success'   => false,
             'msg'       => '上传失败!',
             'file_path' => ''
         ];
-        // 判断是否有上传文件，并赋值给 $file
-        if ($file = $request->upload_file) {
-            // 保存图片到本地
-            $result = $uploader->save($request->upload_file, 'topics', \Auth::id(), 1024);
-            // 图片保存成功的话
-            if ($result) {
-                $data['file_path'] = $result['path'];
-                $data['msg']       = "上传成功!";
-                $data['success']   = true;
-            }
+
+        $validator = Validator::make($request->all(), [
+            'upload_file' => 'image',
+        ]);
+
+        if ($validator->fails()) {
+            $data['msg'] = '图片格式不合法';
+            return $data;
         }
-        return $data;
+            //上传了新文件
+            $path = config('myconfig.file.topic');
+            $url = $request->upload_file->store($path);
+            $url = '/'.$url;
+
+            $data['file_path'] = $url;
+            $data['msg']       = "上传成功!";
+            $data['success']   = true;
+            return $data;
+        }
+
     }
 
 

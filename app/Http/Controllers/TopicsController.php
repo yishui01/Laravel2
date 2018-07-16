@@ -61,7 +61,8 @@ class TopicsController extends Controller
 	public function update(TopicRequest $request, Topic $topic)
 	{
 		$this->authorize('update', $topic);
-		$topic->update($request->all());
+        $topic->fill($request->all());
+        $topic->save();
 
 		return redirect()->to($topic->link())->with('success', '更新成功');
 	}

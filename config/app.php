@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //自己定义的
+        App\Providers\EasySmsServiceProvider::class,
+
     ],
 
     /*

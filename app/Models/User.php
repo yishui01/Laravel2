@@ -13,6 +13,24 @@ class User extends Authenticatable
     use Traits\ActiveUserHelper;
     use Traits\LastActivedAtHelper;//RecordLastActivedTime前置中间件中记录用户登录时间到redis，需要调用方法在这个trait中
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password','introduction','avatar','phone'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -45,23 +63,6 @@ class User extends Authenticatable
         $this->attributes['avatar'] = $path;
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password','introduction','avatar'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 
     public function topics()
     {

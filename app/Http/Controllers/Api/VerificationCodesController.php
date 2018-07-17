@@ -37,6 +37,7 @@ class VerificationCodesController extends Controller
         Cache::put($key, ['phone' => $phone, 'code' => $code], $expiredAt);
 
         return $this->response->array([
+            'env'=>env('APP_ENV'),
             'key' => $key,
             'expired_at' => $expiredAt->toDateTimeString(),
         ])->setStatusCode(201);

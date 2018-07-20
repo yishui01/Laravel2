@@ -20,6 +20,16 @@
                                 <img class="thumbnail img-responsive" src="{{ $topic->user->avatar }}" width="300px" height="300px">
                             </a>
                         </div>
+                        <div class="media-body">
+                            <hr>
+                            <h4><strong>个人简介</strong></h4>
+                            <p>{{ $topic->user->introduction }}</p>
+                            <hr>
+                            <h4><strong>注册于</strong></h4>
+                            <p>{{ $topic->user->created_at->diffForHumans() }}</p>
+                            <h4><strong>最后活跃</strong></h4>
+                            <p>{{ $topic->user->last_actived_at->diffForHumans() }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

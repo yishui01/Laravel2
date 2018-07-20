@@ -6,8 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasRoles;
     use Traits\ActiveUserHelper;
@@ -19,7 +20,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','introduction','avatar','phone'
+        'name', 'email', 'password','introduction','avatar','phone',
+        'weixin_openid', 'weixin_unionid'
     ];
 
     /**
@@ -96,5 +98,17 @@ class User extends Authenticatable
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    // Rest omitted for brevity
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); //返回了用户表的主键也就是id
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -68,6 +68,9 @@ $api->version('v1', [
             // 上传图片
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+            // 发布话题
+            $api->post('topics', 'TopicsController@store')
+                ->name('api.topics.store');
         });
 
 

@@ -20,7 +20,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array', //这个中间件可以将DataArraySerializer转换成ArraySerializer，少一层嵌套结构包裹
+    'middleware' => ['serializer:array','bindings'], //这个中间件可以将DataArraySerializer转换成ArraySerializer，少一层嵌套结构包裹
 ], function($api) {
 
     $api->group([
@@ -71,6 +71,9 @@ $api->version('v1', [
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');
+            // 修改话题
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
         });
 
 

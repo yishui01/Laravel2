@@ -30,7 +30,7 @@ class UsersController extends Controller
         $info = $userRquest->all();
         if($userRquest->avatar) {
             //上传了新文件
-            $path = config('myconfig.file.avatars');
+            $path = config('myconfig.file.avatar');
             $url = $info['avatar']->store($path);
             $url = '/'.$url;
             $info['avatar'] = $url;

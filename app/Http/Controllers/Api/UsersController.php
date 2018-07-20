@@ -6,12 +6,12 @@ use App\Models\User;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\Api\UserRequest;
-
+use App\Models\Image;
 class UsersController extends Controller
 {
+    //手机号注册
     public function store(UserRequest $request)
     {
-
         $verifyData = Cache::get($request->verification_key);
 
         if (!$verifyData) {
@@ -29,14 +29,9 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        // 清除验证码缓存
-        //Cache::forget($request->verification_key);
+        // 清除手机验证码缓存
+        \Cache::forget($request->verification_key);
 
-        /*return $this->response->array([
-            'errcode'=>0,
-            'msg' => '创建成功',
-            'data' =>''
-        ])->setStatusCode(201);*/
         return $this->response
             ->item($user, new UserTransformer()) //设置刚刚创建的用户数据
             ->setMeta([ //设置meta头结构
@@ -51,5 +46,19 @@ class UsersController extends Controller
     public function me()
     {
         return $this->response->item($this->user(), new UserTransformer());
+    }
+
+    public function update(UserRequest $request)
+    {
+        $user = $this->user();
+        $attributes = $request->only(['name', 'email', 'introduction']);
+
+        if ($request->avatar_image_id) {
+            $image = Image::find($request->avatar_image_id);
+            $attributes['avatar'] = $image->path;
+        }
+        $user->update($attributes);
+
+        return $this->response->item($user, new UserTransformer());
     }
 }

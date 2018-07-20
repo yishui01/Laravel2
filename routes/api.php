@@ -53,11 +53,20 @@ $api->version('v1', [
 
 
         /***********需要 token 验证的接口***************/
+        //使用token换取用户信息
         $api->group(['middleware' => 'api.auth'], function($api) {
-            // 当前登录用户信息
+            // 获取登录用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');
+            // 编辑登录用户信息
+            $api->patch('user', 'UsersController@update')
+                ->name('api.user.update');
+            // 上传图片
+            $api->post('images', 'ImagesController@store')
+                ->name('api.images.store');
         });
+
+
     });
 
 });

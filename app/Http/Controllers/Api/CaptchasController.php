@@ -8,7 +8,7 @@ use App\Http\Requests\Api\CaptchaRequest;
 
 class CaptchasController extends Controller
 {
-    //生成验证码，必填手机号来请求
+    //生成图片验证码，必填手机号来请求
     public function store(CaptchaRequest $request, CaptchaBuilder $captchaBuilder)
     {
         $key = 'captcha-'.str_random(15);

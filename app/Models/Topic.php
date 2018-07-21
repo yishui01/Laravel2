@@ -24,11 +24,11 @@ class Topic extends Model
     {
         // 不同的排序，使用不同的数据读取逻辑
         switch ($order) {
-            case 'recent':
+            case 'recent': //这是按创建时间
                 $query->recent();
                 break;
 
-            default:
+            default: //默认是按修改时间
                 $query->recentReplied();
                 break;
         }

@@ -6,8 +6,14 @@ use App\Models\Reply;
 use App\Models\Topic;
 use App\Http\Requests\ReplyRequest;
 use App\Transformers\ReplyTransformer;
+use App\Models\User;
 class RepliesController extends Controller
 {
+    public $pageSize = 20;
+    public function __construct()
+    {
+        $this->pageSize = config('myconfig.page.api.reply');
+    }
     //发表评论接口
     public function store(Topic $topic, Reply $reply, ReplyRequest $Replyrequest)
     {
@@ -19,7 +25,7 @@ class RepliesController extends Controller
         return $this->response->item($reply, new ReplyTransformer())->setStatusCode(201);
     }
 
-    //删除回复
+    //删除评论
     public function destroy(Topic $topic, Reply $reply)
     {
         if ($reply->topic_id != $topic->id) {
@@ -29,6 +35,20 @@ class RepliesController extends Controller
         $this->authorize('destroy', $reply);
         $reply->delete();
         return $this->response->noContent();
+    }
+
+    //查看某个帖子的所有评论
+    public function index(Topic $topic)
+    {
+        $reply = $topic->replies()->paginate($this->pageSize);
+        return $this->response->paginator($reply, new ReplyTransformer());
+    }
+
+    //获取用户发表的所有评论
+    public function userIndex(User $user)
+    {
+        $reply = $user->replies()->paginate($this->pageSize);
+        return $this->response->paginator($reply, new ReplyTransformer());
     }
 
 }

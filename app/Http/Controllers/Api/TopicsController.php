@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\TopicRequest;
-use Dingo\Api\Contract\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Transformers\TopicTransformer;
 use Dingo\Api\Auth\Auth;
@@ -11,9 +11,23 @@ use App\Models\User;
 class TopicsController extends Controller
 {
     //获取话题列表
-    public function index(Request $request, Topic $topic)
+    public function index(Request $request)
     {
-        $topics = $topic->withOrder($request->order)->paginate(20);
+        $order = $request->order;
+        $request = $request->only(['user_id', 'category_id','created_at', 'updated_at','excerpt','order']);
+        $where = [];
+        foreach ($request as $key=>$item) {
+            switch ($key) {
+                case 'created_at':
+                    $where[] = [$key, '>=', $item];
+                case 'updated_at':
+                    $where[] = [$key, '<=', $item];
+                default:
+                    $where[] = [$key, '=', $item];
+            }
+        }
+        $pageSize = config('myconfig.page.api.pageSize');
+        $topics = Topic::where($where)->withOrder($order)->paginate($pageSize);
         return $this->response->paginator($topics, new TopicTransformer());
 
     }

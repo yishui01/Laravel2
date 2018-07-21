@@ -59,6 +59,9 @@ $api->version('v1', [
         //查看用户发表的所有的话题
         $api->get('users/{user}/topics', 'TopicsController@userIndex')
             ->name('api.users.topics.index');
+        //话题详情
+        $api->get('topics/{topic}', 'TopicsController@show')
+            ->name('api.topics.show');
 
 
 

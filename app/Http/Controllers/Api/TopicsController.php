@@ -24,6 +24,12 @@ class TopicsController extends Controller
         return $this->response->paginator($topics, new TopicTransformer());
     }
 
+    //话题详情接口
+    public function show(Topic $topic)
+    {
+        return $this->response->item($topic, new TopicTransformer());
+    }
+
     //发表话题接口
     public function store(TopicRequest $request, Topic $topic)
     {

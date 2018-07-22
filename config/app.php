@@ -178,7 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //自己定义的
-        App\Providers\EasySmsServiceProvider::class,
+        App\Providers\EasySmsServiceProvider::class, //发送短信
+        App\Providers\JpushServiceProvider::class, //极光推送
+
 
     ],
 
@@ -228,7 +230,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
 
 ];

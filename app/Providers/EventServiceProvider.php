@@ -17,9 +17,13 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [ //配置微信登录
             // add your listeners (aka providers) here
             'SocialiteProviders\Weixin\WeixinExtendSocialite@handle'
+        ],
+        //这里我们可以在 DatabaseNotification 创建时，推送消息给客户端
+        'eloquent.created: Illuminate\Notifications\DatabaseNotification' => [
+            'App\Listeners\PushNotification',
         ],
     ];
 

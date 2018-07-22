@@ -28,6 +28,12 @@ return [
         ]
     ],
 
+    //极光推送
+    'jpush'=>[
+        'key' => env('JPUSH_KEY'),
+        'secret' => env('JPUSH_SECRET'),
+    ]
+
 
 
 ];

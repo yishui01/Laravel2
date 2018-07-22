@@ -37,7 +37,7 @@ class AuthorizationsController extends Controller
             $oauth_user = $drive->userFromToken($token);
 
         } catch (\Exception $e) {
-            return $this->response->errorUnauthorized('参数错误，未获取用户信息');
+            return $this->response->errorUnauthorized(trans('auth.failed'));
         }
 
         switch ($type) {

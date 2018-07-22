@@ -20,7 +20,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array','bindings'], //这个中间件可以将DataArraySerializer转换成ArraySerializer，少一层嵌套结构包裹
+    'middleware' => ['serializer:array','bindings', 'change-locale'], //这个中间件可以将DataArraySerializer转换成ArraySerializer，少一层嵌套结构包裹
 ], function($api) {
 
     $api->group([

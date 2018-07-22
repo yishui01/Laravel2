@@ -11,7 +11,7 @@ use App\Models\Reply;
 //教程中是把下面的类改为class TopicReplied extends Notification implements ShouldQueue
 //改完之后发现redis队列发送邮件无效，数据库也没记录，监听也发送成功了，但是就是没收到邮件
 //后来把类的引用去掉，还原为默认生成的即可
-class TopicReplied extends Notification
+class TopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 

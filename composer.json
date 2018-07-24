@@ -21,13 +21,15 @@
         "mews/purifier": "~2.0",
         "overtrue/easy-sms": "^1.1",
         "overtrue/laravel-lang": "~3.0",
+        "overtrue/laravel-wechat": "~4.0",
         "overtrue/pinyin": "~3.0",
         "predis/predis": "~1.0",
         "socialiteproviders/weixin": "^4.0",
         "spatie/laravel-permission": "~2.7",
         "summerblue/administrator": "~1.1",
         "tymon/jwt-auth": "1.0.0-rc.2",
-        "viacreative/sudo-su": "~1.1"
+        "viacreative/sudo-su": "~1.1",
+        "zircote/swagger-php": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.1",

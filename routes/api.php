@@ -38,12 +38,15 @@ $api->version('v1', [
         // 图片验证码
         $api->post('captchas', 'CaptchasController@store')
             ->name('api.captchas.store');
-        // 第三方登录
+        // 第三方登录（微信、QQ、github等）
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
-        // 登录
+        // 手机号/邮箱 登录
         $api->post('authorizations', 'AuthorizationsController@store')
             ->name('api.authorizations.store');
+        // 小程序登录
+        $api->post('weapp/authorizations', 'AuthorizationsController@weappStore')
+            ->name('api.weapp.authorizations.store');
         // 刷新token
         $api->put('authorizations/current', 'AuthorizationsController@update')
             ->name('api.authorizations.update');

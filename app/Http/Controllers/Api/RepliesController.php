@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Reply;
 use App\Models\Topic;
-use App\Http\Requests\ReplyRequest;
+use App\Http\Requests\Api\ReplyRequest;
 use App\Transformers\ReplyTransformer;
 use App\Models\User;
 class RepliesController extends Controller

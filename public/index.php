@@ -55,7 +55,6 @@ $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
 
-if(env('CACHE_DRIVER') != 'redis')throw new \Exception('实在抱歉，请先配置好缓存驱动为redis');
 
 $response->send();
 

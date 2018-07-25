@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\TopicRequest;
-use Illuminate\Http\Request;
+use Dingo\Api\Http\Request;
 use App\Models\Topic;
 use App\Transformers\TopicTransformer;
 use Dingo\Api\Auth\Auth;
@@ -68,7 +68,7 @@ class TopicsController extends Controller
     }
 
     //删除话题
-    public function destroy(Topic $topic, TopicRequest $request)
+    public function destroy(Topic $topic, Request $request)
     {
         $this->authorize('destroy', $topic);
         $topic->delete();

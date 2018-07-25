@@ -23,6 +23,7 @@ class TopicsController extends Controller
         $request = $request->only(['user_id', 'category_id','created_at', 'updated_at','excerpt','order']);
         $where = [];
         foreach ($request as $key=>$item) {
+            if(empty($item))continue;
             switch ($key) {
                 case 'created_at':
                     $where[] = [$key, '>=', $item];

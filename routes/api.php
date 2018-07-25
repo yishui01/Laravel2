@@ -65,6 +65,9 @@ $api->version('v1', [
         //查看用户发表的所有的话题
         $api->get('users/{user}/topics', 'TopicsController@userIndex')
             ->name('api.users.topics.index');
+        // 用户详情
+        $api->get('users/{user}', 'UsersController@show')
+            ->name('api.users.show');
         //话题详情
         $api->get('topics/{topic}', 'TopicsController@show')
             ->name('api.topics.show');
@@ -90,6 +93,9 @@ $api->version('v1', [
                 ->name('api.user.show');
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
+                ->name('api.user.update');
+            //小程序不支持patch方法，所以增加一个put路由
+            $api->put('user', 'UsersController@update')
                 ->name('api.user.update');
             // 上传图片
             $api->post('images', 'ImagesController@store')

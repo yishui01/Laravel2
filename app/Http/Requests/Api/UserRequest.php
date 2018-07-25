@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Dingo\Api\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
@@ -41,6 +41,16 @@ class UserRequest extends FormRequest
                     'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,
                 ];
                 break;
+            case 'PUT':
+                $userId = \Auth::guard('api')->id();
+                return [
+                    'name' => 'between:2,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' .$userId,
+                    'email' => 'email',
+                    'introduction' => 'max:80',
+                    'avatar_image_id' => 'exists:images,id,type,avatar,user_id,'.$userId,
+                ];
+                break;
+
         }
     }
 

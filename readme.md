@@ -1,5 +1,8 @@
 ## laravel-china第二个项目---larbbs论坛系统
 本项目是按照laravel-china教程02编写，主要用于练习laravel框架
+
+线上demo:http://king.wuxxin.com/
+
 ## 项目功能
 - 用户：登录/注册、更新资料、发布话题、发表回复
 - 管理员:除了普通用户的功能外，可以进入后台对内容进行管理，但不可以对用户进行删除操作
